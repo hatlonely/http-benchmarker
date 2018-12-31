@@ -1,0 +1,4 @@
+package: github.com/hatlonely/http-benchmarker
+import:
+- package: github.com/sirupsen/logrus
+  version: ^1.2.0
