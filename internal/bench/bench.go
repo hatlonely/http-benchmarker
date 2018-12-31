@@ -17,12 +17,11 @@ import (
 func NewBenchmarkerBuilder() *BenchmarkerBuilder {
 	return &BenchmarkerBuilder{
 		TimeDistributionThreshold: []time.Duration{
-			time.Duration(300) * time.Microsecond,
-			time.Duration(500) * time.Microsecond,
-			time.Duration(800) * time.Microsecond,
-			time.Duration(1000) * time.Microsecond,
-			time.Duration(2000) * time.Microsecond,
-			time.Duration(5000) * time.Microsecond,
+			time.Duration(50) * time.Millisecond,
+			time.Duration(100) * time.Millisecond,
+			time.Duration(200) * time.Millisecond,
+			time.Duration(300) * time.Millisecond,
+			time.Duration(500) * time.Millisecond,
 		},
 	}
 }
@@ -108,7 +107,7 @@ func (b *Benchmarker) Benchmark() error {
 	for i := range b.timeDistributionThreshold {
 		timeDisArrayStr[i] = fmt.Sprintf("%v", b.timeDistributionThreshold[i])
 	}
-	fmt.Printf("\t\t%v\t%v\t%v\t% 8v\t% 8v\t% 8v\t%v\n", "succ", "fail", "totalTime", "qps", "res_time", strings.Join(timeDisArrayStr, "\t"), `succ%`)
+	fmt.Printf("\t%v\t%v\t%v\t% 8v\t% 8v\t% 8v\t%v\n", "succ", "fail", "totalTime", "qps", "res_time", strings.Join(timeDisArrayStr, "\t"), `succ%`)
 	l := len(b.infos)
 	var wg sync.WaitGroup
 	kpis := make(chan *KPI, b.workerNum)
